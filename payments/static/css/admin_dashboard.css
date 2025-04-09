@@ -1,0 +1,69 @@
+/* Sidebar styles */
+.sidebar {
+    width: 250px;
+    background: #11441a;
+    color: #fff;
+    min-height: 100vh;
+    position: fixed;
+    top: 72px;
+    left: 0;
+    padding-top: 20px;
+}
+
+.sidebar-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-nav li {
+    margin: 10px 0;
+}
+
+.sidebar-nav a {
+    text-decoration: none;
+    color: #ddd;
+    display: block;
+    padding: 12px 20px;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background 0.3s, color 0.3s;
+}
+
+.sidebar-nav a:hover,
+.sidebar-nav .active {
+    background: #1b5e20;
+    color: #fff;
+}
+
+/* Badge styling (Approved / Pending) */
+.badge {
+    font-size: 1rem;
+    padding: 0.4em 0.75em;
+    border-radius: 0.5rem;
+}
+
+/* Uniform, larger buttons */
+.btn {
+    min-width: 90px;
+    height: 40px;
+    font-size: 1rem;
+    padding: 0.4rem 0.75rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Spacing between buttons */
+td .btn + .btn {
+    margin-left: 8px;
+}
+
+/* Smaller Actions column */
+table th:last-child,
+table td:last-child {
+    width: 140px;
+    white-space: nowrap;
+}

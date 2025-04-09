@@ -1,0 +1,64 @@
+{% extends 'payments/base.html' %}
+
+{% block title %}Student Dashboard{% endblock %}
+
+{% block content %}
+
+{% load static %}
+<!-- css for student dashboard -->
+<head>
+    <link rel="stylesheet" href="{% static 'css/student_dashboard.css' %}">
+</head>
+<div class="dashboard-wrapper d-flex">
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar">
+        <ul class="sidebar-nav">
+            <li><a href="{% url 'student_dashboard' %}" class="active">Dashboard</a></li>
+            <li><a href="{% url 'edit_profile' %}">Profile</a></li>
+            <li><a href="{% url 'top_up_history' %}">Top Up</a></li>
+            <li><a href="{% url 'top_up_history' %}">Payment</a></li>
+        </ul>
+    </nav>
+
+
+        <!-- Main Dashboard Content -->
+    <div class="main-content">
+        <div class="dashboard-container text-center">
+            <h2 class="gold-text">Welcome, {{ request.user.username }}!</h2>
+
+            <div class="balance-container">
+                <div class="balance-card">
+                    <p class="balance-label">Available Balance</p>
+                    <p class="balance-amount">${{ balance }}</p>
+                </div>
+            </div>
+
+            <h3 class="mt-4 gold-text">Your Payment History</h3>
+            <div class="table-responsive">
+                <table class="table table-hover rounded-table">
+                    <thead class="thead-gold">
+                        <tr>
+                            <th>Payment Type</th>
+                            <th>Amount</th>
+                            <th>Payment Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for payment in payments %}
+                        <tr>
+                            <td>{{ payment.payment_type|title }}</td>
+                            <td>${{ payment.amount }}</td>
+                            <td>{{ payment.payment_date|date:"F j, Y, g:i A" }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="3" class="text-center text-muted">No payments found.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,189 @@
+{% extends 'payments/base.html' %}
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+{% load static %}
+
+<head>
+    <link rel="stylesheet" href="{% static 'css/admin_dashboard.css' %}">
+</head>
+
+<h2>Admin Dashboard</h2>
+<div class="dashboard-wrapper d-flex">
+
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar">
+        <ul class="sidebar-nav">
+            <li><a href="#" onclick="showUsers('student')">Students</a></li>
+            <li><a href="#" onclick="showUsers('store')">Stores</a></li>
+            <li><a href="#" onclick="showUsers('admin')">Admins</a></li>
+            <li><a href="#" onclick="showUsers('teacher')">Teachers</a></li>
+            <li><a href="#" onclick="showUsers('pending')">Pending Users</a></li>
+        </ul>
+    </nav>
+
+    <!-- Content Section -->
+    <div class="content-section w-100">
+
+        <!-- Student Table -->
+        <div id="student-table" class="user-table user-table-container">
+            <h3>Manage Students</h3>
+            <div class="table-responsive">
+                <table class="table table-bordered w-100">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Balance</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in students %}
+                        <tr>
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>${{ user.balance }}</td>
+                            <td>
+                                {% if user.is_approved %}
+                                    <span class="badge bg-success">Approved</span>
+                                {% else %}
+                                    <span class="badge bg-warning">Pending</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a href="{% url 'edit_user' user.id %}" class="btn btn-primary btn-sm">Edit</a>
+                                <a href="{% url 'delete_user' user.id %}" class="btn btn-danger btn-sm">Delete</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Store Table -->
+        <div id="store-table" class="user-table user-table-container" style="display: none;">
+            <h3>Manage Stores</h3>
+            <div class="table-responsive">
+                <table class="table table-bordered w-100">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in stores %}
+                        <tr>
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>
+                                <a href="{% url 'edit_user' user.id %}" class="btn btn-primary btn-sm">Edit</a>
+                                <a href="{% url 'delete_user' user.id %}" class="btn btn-danger btn-sm">Delete</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Admin Table -->
+        <div id="admin-table" class="user-table user-table-container" style="display: none;">
+            <h3>Manage Admins</h3>
+            <div class="table-responsive">
+                <table class="table table-bordered w-100">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in admins %}
+                        <tr>
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>
+                                <a href="{% url 'edit_user' user.id %}" class="btn btn-primary btn-sm">Edit</a>
+                                <a href="{% url 'delete_user' user.id %}" class="btn btn-danger btn-sm">Delete</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Teacher Table -->
+        <div id="teacher-table" class="user-table user-table-container" style="display: none;">
+            <h3>Manage Teachers</h3>
+            <div class="table-responsive">
+                <table class="table table-bordered w-100">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in teachers %}
+                        <tr>
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>
+                                <a href="{% url 'edit_user' user.id %}" class="btn btn-primary btn-sm">Edit</a>
+                                <a href="{% url 'delete_user' user.id %}" class="btn btn-danger btn-sm">Delete</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Pending Users Table -->
+        <div id="pending-table" class="user-table user-table-container" style="display: none;">
+            <h3>Manage Pending Users</h3>
+            <div class="table-responsive">
+                <table class="table table-bordered w-100">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in pending_users %}
+                        <tr>
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>
+                                <a href="{% url 'approve_user' user.id %}" class="btn btn-success btn-sm">Approve</a>
+                                <a href="{% url 'edit_user' user.id %}" class="btn btn-primary btn-sm">Edit</a>
+                                <a href="{% url 'delete_user' user.id %}" class="btn btn-danger btn-sm">Delete</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function showUsers(role) {
+        document.querySelectorAll('.user-table').forEach(table => table.style.display = 'none');
+        document.getElementById(role + '-table').style.display = 'block';
+    }
+</script>
+
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'payments/base.html' %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+{% load static %}
+
+<!-- css for student dashboard -->
+<head>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+
+<div class="container">
+    <div class="login-container">
+        <h2 class="login-title">Login</h2>
+
+        {% if messages %}
+            <div class="alert-container">
+                {% for message in messages %}
+                    <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label class="form-label">Username</label>
+                <input type="text" name="username" class="form-control login-input" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Password</label>
+                <input type="password" name="password" class="form-control login-input" required>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn login-btn">Login</button>
+            </div>
+        </form>
+        <p class="mt-3 text-center">Don't have an account? 
+            <a href="{% url 'register' %}" class="login-link">Register here</a>
+        </p>
+    </div>
+</div>
+
+
+<script>
+    // Check and apply theme
+    function applyTheme() {
+        const theme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', theme);
+    }
+    applyTheme();
+</script>
+
+{% endblock %}

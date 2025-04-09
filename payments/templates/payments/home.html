@@ -1,0 +1,81 @@
+{% extends 'payments/base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+{% load static %}
+
+<!-- css for student dashboard -->
+<head>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+
+<div class="container d-flex flex-column align-items-center justify-content-center vh-100">
+    <!-- Header Text -->
+    <h1 class="glow-text">TRIS HUT Payment System</h1>
+    <p class="subtext">Secure & Fast Transactions</p>
+
+    <!-- Navigation Buttons -->
+    <div class="btn-group mb-4">
+        <button class="btn btn-success active" id="loginBtn">Login</button>
+        <button class="btn btn-outline-success" id="registerBtn">Register</button>
+    </div>
+
+    <!-- Card Container for Equal-Sized Boxes -->
+    <div class="card-container">
+        <div class="card-box" id="loginForm">
+            <h2 class="text-success">Login</h2>
+            <p>Enter your credentials to access your account.</p>
+            <a href="{% url 'login' %}" class="btn btn-success w-100">Go to Login</a>
+        </div>
+        <div class="card-box d-none" id="registerForm">
+            <h2 class="text-success">Register</h2>
+            <p>Create a new account.</p>
+            <a href="{% url 'register' %}" class="btn btn-outline-success w-100">Go to Register</a>
+        </div>
+    </div>
+</div>
+
+<!-- About & Contact Section -->
+<section class="info-section d-flex justify-content-center py-3">
+    <div class="info-box">
+        <h2 class="text-success">About Us</h2>
+        <p class="about-text">Tris Hut Payment System is designed to provide a seamless and secure way for students to make transactions at the school cafe without long wait times. Our goal is to improve efficiency and convenience for everyone.</p>
+    </div>
+    <div class="info-box">
+        <h2 class="text-success">Contact Us</h2>
+        <p>Have questions or need support? Reach out to us!</p>
+        <p>Email: <a href="mailto:support@trishut.com">armawesome22@gmail.com </a></p>
+        <p>Phone: +083 086 7387</p>
+    </div>
+</section>
+
+
+
+<!-- JavaScript for Interactive Elements -->
+<script>
+    document.getElementById('loginBtn').addEventListener('click', function () {
+        document.getElementById('loginBtn').classList.add('btn-success');
+        document.getElementById('loginBtn').classList.remove('btn-outline-success');
+        document.getElementById('registerBtn').classList.add('btn-outline-success');
+        document.getElementById('registerBtn').classList.remove('btn-success');
+        
+        document.getElementById('loginForm').classList.remove('d-none');
+        document.getElementById('loginForm').classList.add('fade-in');
+        document.getElementById('registerForm').classList.add('d-none');
+    });
+
+    document.getElementById('registerBtn').addEventListener('click', function () {
+        document.getElementById('registerBtn').classList.add('btn-success');
+        document.getElementById('registerBtn').classList.remove('btn-outline-success');
+        document.getElementById('loginBtn').classList.add('btn-outline-success');
+        document.getElementById('loginBtn').classList.remove('btn-success');
+        
+        document.getElementById('registerForm').classList.remove('d-none');
+        document.getElementById('registerForm').classList.add('fade-in');
+        document.getElementById('loginForm').classList.add('d-none');
+    });
+</script>
+
+{% endblock %}

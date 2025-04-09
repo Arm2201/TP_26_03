@@ -1,0 +1,76 @@
+{% extends 'payments/base.html' %}
+
+{% block title %}Store Dashboard{% endblock %}
+{% block content %}
+<h2>Store Dashboard</h2>
+
+<!-- css for store dashboard -->
+<head>
+    <link rel="stylesheet" href="{% static 'css/store_dashboard.css' %}">
+</head>
+<!-- Button to Process Payment -->
+<a href="{% url 'process_payment' %}" class="btn btn-primary mb-4">Process Payment</a>
+
+<!-- Sales Summary Section -->
+<div class="row mb-4">
+    <div class="col-md-4">
+        <div class="card text-white bg-success mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Total Sales</h5>
+                <p class="card-text">${{ total_sales }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-white bg-info mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Total Transactions</h5>
+                <p class="card-text">{{ store_payments|length }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Filter Form -->
+<form method="GET" class="mb-4">
+    <div class="row">
+        <div class="col-md-4">
+            <input type="date" name="start_date" class="form-control" placeholder="Start Date" value="{{ request.GET.start_date }}">
+        </div>
+        <div class="col-md-4">
+            <input type="date" name="end_date" class="form-control" placeholder="End Date" value="{{ request.GET.end_date }}">
+        </div>
+        <div class="col-md-4">
+            <button type="submit" class="btn btn-secondary">Filter</button>
+        </div>
+    </div>
+</form>
+
+<!-- Sales Report Table -->
+<h3>Sales Reports</h3>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Amount</th>
+            <th>Date</th>
+            <th>Student</th>
+            <th>Payment Type</th>  <!-- Added column for Payment Type -->
+        </tr>
+    </thead>
+    <tbody>
+        {% for payment in store_payments %}
+        <tr>
+            <td>${{ payment.amount }}</td>
+            <!-- Update the date format to match the student dashboard format -->
+            <td>{{ payment.payment_date|date:"F j, Y, g:i A" }}</td>  <!-- Example: "December 1, 2024, 5:00 PM" -->
+            <td>{{ payment.user.username }}</td>
+            <td>{{ payment.payment_type|title }}</td>  <!-- Display Payment Type -->
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4" class="text-center">No transactions found for the selected date range.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'payments/base.html' %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+
+{% load static %}
+
+<!-- css for student dashboard -->
+<head>
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+</head>
+
+<div class="container">
+    <div class="form-container">
+        <h2 class="form-title">Register</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            {% for field in form %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+
+                    <!-- Keep password help text, but make it smaller -->
+                    {% if field.help_text and field.name != "username" %}
+                        <small class="form-text password-help">{{ field.help_text }}</small>
+                    {% endif %}
+
+                    <!-- Display errors in red text -->
+                    {% if field.errors %}
+                        <small class="text-danger">{{ field.errors.as_text }}</small>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <button type="submit" class="btn register-btn">Register</button>
+        </form>
+
+        <p class="mt-3">
+            Already have an account? 
+            <a href="{% url 'login' %}" class="login-link">Login here</a>
+        </p>
+    </div>
+</div>
+
+{% endblock %}

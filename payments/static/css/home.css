@@ -1,0 +1,70 @@
+.glow-text {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #004d00;
+    text-shadow: 0 0 5px rgba(0, 128, 0, 0.5);
+}
+
+.subtext {
+    font-size: 1.2rem;
+    color: #2d5d34;
+    opacity: 0.9;
+}
+
+/* Container to Keep Boxes the Same Size */
+.card-container {
+    width: 450px;
+    height: 250px;
+}
+
+/* Styling for Equal-Sized Boxes */
+.card-box {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* About & Contact Sections */
+.info-section {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: -30px; /* Moves the section higher */
+}
+
+.info-box {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 300px;
+}
+
+.about-text, .info-box p {
+    font-size: 1.1rem;
+    color: #333;
+}
+
+/* Fade-in Effect */
+.fade-in {
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

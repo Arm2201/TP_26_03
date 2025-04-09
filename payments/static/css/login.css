@@ -1,0 +1,111 @@
+:root {
+    /* Default theme (light) */
+    --primary-color: #228B22; /* Default green */
+    --btn-color: #008000;
+    --btn-hover-color: #006400;
+    --text-color: black;
+    --background-color: rgba(255, 255, 255, 0.79);
+    --input-border: #ccc;
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+    --primary-color: #90EE90; /* Light green */
+    --btn-color: #32CD32;
+    --btn-hover-color: #228B22;
+    --text-color: white;
+    --background-color: #333;
+    --input-border: #666;
+}
+
+/* Remove scrollbar */
+body {
+    background: white !important;
+    overflow: hidden;
+}
+
+/* Center the form */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 85vh;
+}
+
+.login-container {
+    background: var(--background-color);
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 400px;
+    color: var(--text-color);
+}
+
+.login-title {
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.form-group {
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.login-input {
+    width: 100%;
+    padding: 6px;
+    border: 1px solid var(--input-border);
+    border-radius: 5px;
+    background: var(--background-color);
+    color: var(--text-color);
+}
+
+.login-btn {
+    background-color: var(--btn-color);
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.login-btn:hover {
+    background-color: var(--btn-hover-color);
+}
+
+.login-link {
+    color: var(--btn-color);
+    text-decoration: none;
+    font-weight: normal;
+}
+
+.login-link:hover {
+    text-decoration: underline;
+}
+
+/* Alert message styling */
+.alert-container {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.alert {
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.alert-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}

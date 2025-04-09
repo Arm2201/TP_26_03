@@ -1,0 +1,68 @@
+{% extends 'payments/base.html' %}
+
+{% load static %}  <!-- Add this line to load the static tag -->
+
+{% block title %}Edit Profile{% endblock %}
+
+{% block content %}
+<head>
+    <link rel="stylesheet" href="{% static 'css/edit_profile.css' %}">
+</head>
+
+<div class="dashboard-wrapper d-flex">
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar">
+        <ul class="sidebar-nav">
+            <li><a href="{% url 'student_dashboard' %}" >Dashboard</a></li>
+            <li><a href="{% url 'edit_profile' %}" >Profile</a></li>
+            <li><a href="{% url 'top_up_history' %}">Top Up</a></li>
+            <li><a href="#">Payment</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-4 profile-container">
+        <h2>Edit Profile</h2>
+        <div class="card p-4 shadow">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label for="username" class="form-label">Username</label>
+                    {{ form.username }}
+                </div>
+
+                <div class="form-group">
+                    <label for="email" class="form-label">Email</label>
+                    {{ form.email }}
+                </div>
+
+                <div class="form-group">
+                    <label for="profile_image" class="form-label">Profile Picture</label><br>
+                    {% if user.profile_image %}
+                        <img src="{{ user.profile_image.url }}" class="img-thumbnail profile-image mb-3" id="profile-image-preview">
+                    {% else %}
+                        <img src="{% static 'images/default_profile.png' %}" class="img-thumbnail profile-image mb-3" id="profile-image-preview">
+                    {% endif %}
+                    {{ form.profile_image }}
+                </div>
+
+                <button type="submit" class="btn btn-success btn-block">Save Changes</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Dynamically update the profile picture preview when a new image is selected
+    document.querySelector('input[name="profile_image"]').addEventListener('change', function(event) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            // Set the new image as the profile picture preview
+            document.getElementById('profile-image-preview').src = e.target.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    });
+</script>
+
+{% endblock %}

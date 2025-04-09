@@ -1,0 +1,26 @@
+{% extends 'payments/base.html' %}
+{% block title %}Sales Report{% endblock %}
+{% block content %}
+<h2>Sales Report</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Student</th>
+            <th>Amount</th>
+            <th>Payment Type</th>
+            <th>Payment Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for payment in store_payments %}
+        <tr>
+            <td>{{ payment.user.username }}</td>
+            <td>${{ payment.amount }}</td>
+            <td>{{ payment.payment_type }}</td>
+            <td>{{ payment.payment_date }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
